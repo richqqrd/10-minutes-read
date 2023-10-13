@@ -4,4 +4,4 @@
 - Richard Middendorf (582204)
 
 ## Projektbeschreibung
-Dieses Repository enthält 10-minutes-read, eine Anwendung zur Verwaltung von Büchern. 
+Dieses Repository enthält 10-Minutes-Read, eine Anwendung zur Verwaltung von Büchern. 
