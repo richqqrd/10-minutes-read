@@ -5,3 +5,6 @@
 
 ## Projektbeschreibung
 Dieses Repository enthält 10-Minutes-Read, eine Anwendung zur Verwaltung von Büchern. 
+
+## Back-End
+Dieses Projekt benutzt die Bookmonkey API als Back-End
