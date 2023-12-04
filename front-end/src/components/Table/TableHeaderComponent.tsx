@@ -1,11 +1,9 @@
-// BooksTableComponent.tsx
 import React from 'react';
-import { Book } from '../domain/bookInterface';
+import { Book } from '../../domain/bookInterface';
 import { TableItemComponent } from './TableItemComponent';
 
 
 export const TableHeaderComponent = function({books}: {books: Book[]}) {
-
     return (
         <table>
             <thead>
