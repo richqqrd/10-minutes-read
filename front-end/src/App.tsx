@@ -1,14 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import { AppHeaderComponent } from './components/AppHeaderComponent';
-import { TableHeaderComponent } from './components/TableHeaderComponent';
+import { AppHeaderComponent } from './components/AppHeader/AppHeaderComponent';
+import { TableHeaderComponent } from './components/Table/TableHeaderComponent';
 import { Book } from './domain/bookInterface'
-import { exampleBook } from './domain/ExampleBook';
 import { getAllItems as fetchItems } from './domain/API';
-
-
-
-
 
 function App() {
   const [books, setBooks] = useState<Book[]>([]);
@@ -18,7 +13,6 @@ function App() {
       setBooks(fetchedBooks);
     });
   }, []);
-
 
   return (
     <div className="App">
@@ -30,7 +24,6 @@ function App() {
       </body>
     </div>
   );
-
-  }
+}
 
 export default App;
