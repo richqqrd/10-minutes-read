@@ -15,7 +15,7 @@ export const TableHeaderComponent = function({books}: {books: Book[]}) {
                     <th>Author</th>
                     <th>Publisher</th>
                     <th>Price</th>
-                    <th>Like</th>
+                    <th>Likes</th>
                 </tr>
             </thead>
             <tbody>
