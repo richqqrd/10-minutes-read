@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
-import {Book} from '../domain/bookInterface';
-import likeImage from '../like.png';
-
-
+import {Book} from '../../domain/bookInterface';
+import likeImage from '../../like.png';
 
 export const TableItemComponent = function({id, cover, title, isbn, author, publisher, price}: Book) {
-
     const [like, setLike] = useState(0);
 
     const handleImageClick = function(){
