@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../10-minutes-read-logo.png'
+import logo from '../../10-minutes-read-logo.png'
 
 export const AppHeaderComponent = function(){
     return ( 
