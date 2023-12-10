@@ -1,5 +1,4 @@
 export interface Book {
-    id?: number;
     title: string;
     subtitle?: string;
     isbn: string;
@@ -9,5 +8,6 @@ export interface Book {
     price?: number;
     numPages?: number;
     cover?: string;
+    likes?: number,
     userId?: number
 };

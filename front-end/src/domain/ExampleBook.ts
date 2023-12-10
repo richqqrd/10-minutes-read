@@ -1,6 +1,5 @@
 import {Book} from './bookInterface';
 export const exampleBook: Book = {
-    "id": 101010,
     "title": "ExampleBook",
     "subtitle": "This is an Example of a Book",
     "isbn": "1111111111111",
@@ -10,5 +9,6 @@ export const exampleBook: Book = {
     "price": 19.99,
     "numPages": 3,
     "cover": "http://localhost:4730/covers/1001606140805.png",
+    "likes": 20,
     "userId": 1
 };

@@ -1,11 +1,20 @@
 .App {
   text-align: center;
-  background-color: #282c34;
+  background-color: #ffffff;
   min-height: 100vh;
 }
 
-.App-title {
+.App-table {
+  display: flex;
+  justify-content: start;
+}
 
+.App-header-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
 }
 
 .App-logo {
@@ -13,44 +22,52 @@
   margin-right: 20px;
 }
 
-.App-header-content {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+.App-title {
+  color: black
 }
 
-.App-header {
+.books-container {
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  flex-wrap: wrap;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  margin-right: 50px;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-.App-table {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: green;
-  width: 100%;
-  overflow: auto;
-
-}
-
-.App-table td, .App-table th{
-  border: 1px solid black;
-  padding: 10px;
-  font-size: 0.8em;
-}
-
-.App-table-cover{
-  width: 100px;
+.book-cover{
   height: 150px;
   object-fit: contain;
+  margin: auto;
+  position: relative;
+  z-index: 1;
+  border-radius: 10px;
+  background-clip: content-box;
 }
 
+.book-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 11px;
+  padding: 0;
+  margin-top: 0;
+  font-weight: bold;
+}
+
+.book-item {
+  margin: 10px 5px;
+  text-align: center;
+  box-sizing: border-box;
+  border: 1px solid rgb(255, 255, 255);
+  border-radius: 10px;
+  position: relative;
+  background-color: #f1f1f167;
+}
+
+.book-item:hover {
+  border-color: blue;
+  transform: scale(1.05);
+}
+
+.filterComponent {
+  margin-right: 20px;
+}

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import { AppHeaderComponent } from './components/AppHeader/AppHeaderComponent';
 import { TableHeaderComponent } from './components/Table/TableHeaderComponent';
+import { FilterComponent } from './components/Filter/FilterComponent'
 import { Book } from './domain/bookInterface'
 import { getAllItems as fetchItems } from './domain/API';
 
@@ -14,12 +15,15 @@ function App() {
     });
   }, []);
 
+
+
   return (
     <div className="App">
       <header className="App-header">
         <AppHeaderComponent />
       </header>
       <body className="App-table">
+        <FilterComponent />
         <TableHeaderComponent books={books}/>
       </body>
     </div>
