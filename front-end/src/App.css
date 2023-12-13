@@ -30,6 +30,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: flex-start;
   margin-right: 50px;
 }
 
@@ -53,6 +54,12 @@
   font-weight: bold;
 }
 
+.book-author {
+  font-size: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
 .book-item {
   margin: 10px 5px;
   text-align: center;
@@ -61,13 +68,50 @@
   border-radius: 10px;
   position: relative;
   background-color: #f1f1f167;
+  display: inline-block;
 }
 
-.book-item:hover {
-  border-color: blue;
+.book-item-content.selected {
   transform: scale(1.05);
 }
 
-.filterComponent {
-  margin-right: 20px;
+.book-item:hover {
+  border-color: rgb(148, 0, 254);
+}
+
+.book-price {
+  font-size: 0.8em;
+  color: rgb(148, 0, 254);
+  margin-top: -10px;
+}
+
+.book-button {
+  background-color: rgb(148, 0, 254);
+  border-radius: 5px;
+  border: none;
+  color: white;
+  font-size: 0.5em;
+  font-weight: bold;
+  padding: 10px 20px;
+  margin-left: 10px;
+  width: 100px;
+  height: 40px;
+  margin-bottom: 10px;
+}
+
+.book-item-button {
+  display: flex;
+  align-items: center;
+}
+
+.book-cover-container {
+  position: relative;
+}
+
+.book-like-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1;
+
 }
