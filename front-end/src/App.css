@@ -1,3 +1,6 @@
+
+
+
 .App {
   text-align: center;
   background-color: #ffffff;
@@ -31,7 +34,6 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: flex-start;
-  margin-right: 50px;
 }
 
 .book-cover{
@@ -61,7 +63,7 @@
 }
 
 .book-item {
-  margin: 10px 5px;
+  margin: 10px 10px;
   text-align: center;
   box-sizing: border-box;
   border: 1px solid rgb(255, 255, 255);
@@ -113,5 +115,4 @@
   top: 10px;
   right: 10px;
   z-index: 1;
-
 }
