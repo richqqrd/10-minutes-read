@@ -7,10 +7,7 @@
   min-height: 100vh;
 }
 
-.App-table {
-  display: flex;
-  justify-content: start;
-}
+
 
 .App-header-content {
   display: flex;
@@ -115,4 +112,16 @@
   top: 10px;
   right: 10px;
   z-index: 1;
+}
+
+.App-footer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.App-footer-container {
+  background-color: #dfdfdf;
+  padding: 20px 10px;
 }
