@@ -5,9 +5,9 @@ export interface Book {
     abstract?: string;
     author?: string;
     publisher?: string;
-    price?: number;
+    price?: string;
     numPages?: number;
     cover?: string;
     likes?: number,
-    userId?: number
+    userId?: string
 };
