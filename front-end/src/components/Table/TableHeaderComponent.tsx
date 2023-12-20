@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Book } from '../../domain/bookInterface';
 import { TableItemComponent } from './TableItemComponent';
 import {useBooks } from '../../domain/hooks'
 import {fetchState} from '../../domain/FetchStateEnum'
 import { LoadingComponent } from '../../components/Loading/LoadingComponent';
+import { AddItemComponent } from './AddItemComponent';
+import { Link } from 'react-router-dom';
+
 
 
 
@@ -25,9 +27,12 @@ export const TableHeaderComponent = function() {
       }
     else {
         return (
+          <div className="underHeader">
+          <Link to="/books/add" className="new-book-link">Neues Buch hinzufügen</Link>
             <div className="books-container">
                 {books.map(book => <TableItemComponent key={book.isbn} {...book} />)}
             </div>
+          </div>
         )
     }
 }
