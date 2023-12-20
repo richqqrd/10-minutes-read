@@ -6,16 +6,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import unlike_icon from '../../icon-unlike.svg'
 import like_icon from '../../icon-like.svg'
 import {updateItem} from '../../domain/API';
+import { NavLink } from 'react-router-dom';
 
 
 
 export const TableItemComponent = function({title, subtitle, isbn, abstract, author, publisher, price, numPages, cover, likes, userId}: Book) {
     const [like, setLike] = useState(false);
-    const [selected, setSelected] = useState(false);
-
-    const handleBookClick = function(){
-        setSelected(!selected);
-    }
 
     const handleLikeClick = function(e: React.MouseEvent){
         e.stopPropagation();
@@ -56,8 +52,9 @@ export const TableItemComponent = function({title, subtitle, isbn, abstract, aut
 
     return (
 
+    <NavLink to={`/books/${isbn}`}>
         <div className="book-item">
-            <div className={`book-item-content ${selected ? 'selected' : ''}`} onClick={handleBookClick}>
+            <div className={`book-item-content`}>
                 <div className="book-cover-container">
                     <img className="book-cover" src={cover ? cover : noImage}/>
                     <img className={`book-like-icon ${like ? 'liked' : ''}`} src={like ? like_icon : unlike_icon} alt="Like" onClick={handleLikeClick}/>                
@@ -66,9 +63,7 @@ export const TableItemComponent = function({title, subtitle, isbn, abstract, aut
                 <p className="book-title ">{title.length > maxLength ? title.substring(0, maxLength - 3) + "..." : title}</p> 
                 <p className="book-price">{price}</p>
             </div>
-            <div className={"book-item-button"}>
-                {selected && <button className="book-button"><FontAwesomeIcon icon={faShoppingCart}/> Add to cart</button>}
-            </div>
         </div>
+    </NavLink>
     )
 };
