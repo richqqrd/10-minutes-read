@@ -13,12 +13,13 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  justify-content: flex-start;
+  font-size: calc(5px + 2vmin);
+  background-color: #dfdfdf;
 }
 
 .App-logo {
-  height: 10vmin;
+  height: 5vmin;
   margin-right: 20px;
 }
 
@@ -70,10 +71,6 @@
   display: inline-block;
 }
 
-.book-item-content.selected {
-  transform: scale(1.05);
-}
-
 .book-item:hover {
   border-color: rgb(148, 0, 254);
 }
@@ -98,10 +95,6 @@
   margin-bottom: 10px;
 }
 
-.book-item-button {
-  display: flex;
-  align-items: center;
-}
 
 .book-cover-container {
   position: relative;
@@ -125,3 +118,71 @@
   background-color: #dfdfdf;
   padding: 20px 10px;
 }
+
+.item-detail-container {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.item-detail-cover {
+  width: 50%;
+  object-fit: cover;
+}
+
+.item-detail-attributes {
+  text-align: left;
+}
+
+.item-detail-attributes-title {
+  font-size: 25px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.item-detail-attributes-author {
+  font-size: 14px;
+  text-decoration: underline;
+}
+
+.item-detail-attributes-price {
+  font-size: 25px;
+  font-weight: bold;
+  margin: 20px;
+  text-align: left;
+
+}
+
+.item-detail-beschreibung {
+  text-align: left;
+  padding-left: 60px;
+}
+
+.item-detail-detail{
+  text-align: left;
+  padding-left: 20px;
+}
+
+
+.item-detail-beschreibung-text {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+
+}
+.item-detail-detail-text {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+
+}
+
+.item-detail-below {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.item-detail-detail-seiten, .item-detail-detail-publisher, .item-detail-detail-likes{
+  font-weight: bold;
+}
+
