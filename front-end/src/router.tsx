@@ -1,17 +1,17 @@
 import { createBrowserRouter, redirect } from "react-router-dom";
 import  App from './App';
 import { ErrorComponent }  from './components/Error/ErrorComponent'
-import { TableHeaderComponent } from "./components/Table/TableHeaderComponent";
+import { ItemContainerComponent } from "./components/Table/ItemContainerComponent";
 import { ItemDetailComponent } from "./components/Item/ItemDetailComponent";
 import {EditItemDetailComponent} from './components/Item/EditItemDetailComponent'
 import { AddItemComponent } from "./components/Table/AddItemComponent";
-import { DeleteItemDetailComponent } from './components/Item/DeleteItemDetailComponent'
+import { AboutComponent } from "./components/Footer/AboutComponent";
 
 export const router = createBrowserRouter([
     {
         path: "/",
         element: <App />,
-        errorElement: <ErrorComponent />,
+        errorElement: <ErrorComponent error={{ name: "", message: "" }} />,
         children: [
             {
                 path: "", 
@@ -20,7 +20,7 @@ export const router = createBrowserRouter([
 
             {
                 path: "books",
-                element: <TableHeaderComponent />,
+                element: <ItemContainerComponent />,
             },
 
             {
@@ -39,8 +39,8 @@ export const router = createBrowserRouter([
             },
 
             {
-                path: "books/:isbn/delete",
-                element: <DeleteItemDetailComponent />
+                path: "about",
+                element: <AboutComponent />
             }
         ]
     }
