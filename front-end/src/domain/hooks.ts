@@ -39,12 +39,12 @@ export const useBooks = () => {
 };
 
 
-export const useBook = (isbn: string) => {
+export const useBook = () => {
     const [book, setBook] = useState<Book>();
     const [state, setFetchState] = useState<fetchState>(fetchState.initial);
     const [error, setError] = useState<Error | null>(null);
 
-    useEffect(() => {
+    const getBook = (isbn: string) => {
         setFetchState(fetchState.loading);
     getItemById(isbn).then(fetchedBook => {
         setBook(fetchedBook);
@@ -53,28 +53,39 @@ export const useBook = (isbn: string) => {
         setFetchState(fetchState.error);
         setError(error);
     });
-    }, [isbn]);
+    };
 
-    return {book, state, error }
+    return {book, state, error, getBook}
 }
 
 export const useCreateBook = () => {
-    const [error, setError] = useState<Error | null>(null);
-
-    const createBook = (newBook: Book) => {
-        const response = createItem(newBook);
-        console.log(response);
-    }
-
-    return { createBook, error }
-}
-
-export const useUpdateBook = (isbn: string, updateBook: Book) => {
     const [book, setBook] = useState<Book>();
     const [state, setFetchState] = useState<fetchState>(fetchState.initial);
     const [error, setError] = useState<Error | null>(null);
 
-    const update = () => {
+
+
+
+    const createBook = (newBook: Book) => {
+        setFetchState(fetchState.loading);
+        createItem(newBook).then(createdBook => {
+            setBook(createdBook);
+            setFetchState(fetchState.success);
+        }).catch(error => {
+            setFetchState(fetchState.error);
+            setError(error);
+        })
+    };
+
+    return { book, state, error, createBook }
+}
+
+export const useUpdateBook = () => {
+    const [book, setBook] = useState<Book>();
+    const [state, setFetchState] = useState<fetchState>(fetchState.initial);
+    const [error, setError] = useState<Error | null>(null);
+
+    const update = (isbn: string, updateBook: Book) => {
         setFetchState(fetchState.loading);
         updateItem(isbn, updateBook).then(updatedBook => {
             setBook(updateBook);
@@ -88,15 +99,13 @@ export const useUpdateBook = (isbn: string, updateBook: Book) => {
     return { book, state, error, update}
 }
 
-export const useDeleteBook = (isbn: string) => {
-    const [book, setBook] = useState<Book>();
+export const useDeleteBook = () => {
     const [state, setFetchState] = useState<fetchState>(fetchState.initial);
     const [error, setError] = useState<Error | null>(null);
 
-    const deleteBook = () => {
+    const deleteBook = (isbn: string) => {
         setFetchState(fetchState.loading);
-        deleteItem(isbn).then(deletedBook => {
-            setBook(deletedBook);
+        deleteItem(isbn).then(() => {
             setFetchState(fetchState.success);
         }).catch(error => {
             setFetchState(fetchState.error);
@@ -104,7 +113,7 @@ export const useDeleteBook = (isbn: string) => {
         });
     };
 
-    return { book, state, error, deleteBook}
+    return { state, error, deleteBook}
 
 }
 
