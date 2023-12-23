@@ -16,6 +16,7 @@ async function templateFetch(url: string, method: string, payload?: book): Promi
     } catch(error) {
         if(error instanceof Error){
             console.error('Error:', error.message);
+            throw error;
         }
     }
 }
