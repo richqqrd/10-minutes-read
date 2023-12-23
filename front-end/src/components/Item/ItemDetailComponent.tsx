@@ -1,11 +1,10 @@
-import React, { useEffect, useState }  from 'react';
+import React, {useEffect }  from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import {useBook, useDeleteBook} from '../../domain/hooks'
+import {useBook, useDeleteBook, useUpdateBook} from '../../domain/hooks'
 import {fetchState} from '../../domain/FetchStateEnum'
 import { LoadingComponent } from '../Loading/LoadingComponent';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
-
+import { ErrorComponent } from '../Error/ErrorComponent';
+import { Book } from '../../domain/bookInterface';
 
 
 
@@ -13,72 +12,100 @@ import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 
 export const ItemDetailComponent = function() {
     const { isbn } = useParams<{isbn: string}>();
-    const { book, state, error } = useBook(isbn ?? '');
+    const { book, state, error, getBook } = useBook();
     const navigate = useNavigate();
-
-    const { book: deleteItemBook, state: deleteState, error: deleteError, deleteBook } = useDeleteBook(isbn!);
-
-    const handleDelete= function() {
-        deleteBook();
-    }
+    const { state: deleteState, error: deleteError, deleteBook } = useDeleteBook();
+    const {book: updateBook, state: updateState, error: updateError, update} = useUpdateBook();
+    
+    useEffect(() => {
+        getBook(isbn!);
+    },[updateBook])
 
     useEffect(() => {
+        if (deleteState === fetchState.error){
+            <ErrorComponent error={deleteError!} />
+        }
+        if (updateState === fetchState.error){
+            <ErrorComponent error={updateError!} />
+        }
+    }, [deleteState, updateState])
+
+    const handleDelete = function() {
+        deleteBook(isbn!);
+    }
+
+    const handleLike = function(e: React.MouseEvent){
         if (state === fetchState.success){
+            const newBook: Book = {
+                title: book!.title,
+                subtitle: book!.subtitle,
+                isbn: book!.isbn,
+                abstract: book!.abstract,
+                author: book!.author,
+                publisher: book!.publisher,
+                price: book!.price,
+                numPages: book!.numPages,
+                cover: book!.cover,
+                likes: book!.likes! + 1,
+                userId: book!.userId
+            };
+
+        update(book!.isbn, newBook);
+    }
+}
+
+    useEffect(() => {
+        if (deleteState === fetchState.success){
             navigate(`/books`);        
         }
+
     }, [deleteState]);
 
-
-    if (state === fetchState.loading){
+    if (state === fetchState.loading){  
         return <LoadingComponent />
       }
-    
     else if (state === fetchState.error){
-        return <div>ERROR...</div>
-      }
+        return <ErrorComponent error={error!} />
+    }
     else {
         return (
-            <div>
-                <Link to="/books" className="back-to-books-button">Zurück zur Übersicht</Link>
-                <div className="item-detail-container">
-                    <div className="item-detail-cover">
+            <div className='pb-12'>
+                <div className="flex">
+                    <div className="pl-4 object-cover w-1/2 justify-center items-center">
                         <img src={book?.cover}></img>
                     </div>
-                    <div className="item-detail-attributes">
-                        <div className="item-detail-attributes-title">{book?.title}</div>
-                        <div className="item-detail-attributes-subtitle">{book?.subtitle}</div>
-                        <div className="item-detail-attributes-author">{book?.author}</div> 
-                        <div className="item-detail-attributes-price">{book?.price}</div>
-                        <div className={"book-item-button"}>
-                            <button className="book-button"><FontAwesomeIcon icon={faShoppingCart}/> Add to cart</button>
-                            <button className="book-button"><Link to={`/books/${isbn}/edit`} className="edit-book-button">Buch bearbeiten</Link></button>
-                            <button className="book-button" onClick={handleDelete}>Buch löschen</button>
+                    <div className="text-left pt-12">
+                        <div className="text-2xl font-bold">{book?.title}</div>
+                        <div>{book?.subtitle}</div>
+                        <div className="text-base underline">{book?.author}</div> 
+                        <div className="text-2xl font-bold pt-3">{book?.price}</div>
+                        <div className={"flex justify-start space-x-4 font-bold pt-3"}>
+                            <button className="t-3 bg-purple-600 rounded-lg text-white text-xs w-24 h-10"onClick={handleLike}>Like book</button>
+                            <button className='t-3 bg-purple-600 rounded-lg text-white text-xs w-24 h-10'><Link to={`/books/${isbn}/edit`}>Edit book</Link></button>
+                            <button className="t-3 bg-purple-600 rounded-lg text-white text-xs w-24 h-10"onClick={handleDelete}>Delete book</button>
                         </div>
                     </div>
             </div>
-            <div className="item-detail-below">
-                <div className="item-detail-beschreibung">
-                    <div className="item-detail-beschreibung-text">Beschreibung</div>
-                    <div className="item-detail-beschreibung-content">{book?.abstract}</div>
+            <div className="grid grid-cols-2">
+                <div className="text-left pl-15 pr-5">
+                    <div className="text-lg font-bold mb-5">Beschreibung</div>
+                    <div className='text-left'>{book?.abstract}</div>
                 </div>
-                <div className="item-detail-detail">
-                    <div className="item-detail-detail-text">Details</div>
-                    <div className="item-detail-detail-content">
-                        <div><span className="item-detail-detail-seiten">Seiten: </span>{book?.numPages}</div>
-                        <div><span className="item-detail-detail-publisher">Publisher: </span>{book?.publisher}</div>
-                        <div><span className="item-detail-detail-likes">Likes: </span>{book?.likes}</div>
-
-                    </div>
+                <div className="text-left">
+                    <div className="text-lg font-bold mb-5">Details</div>
+                    <div><span>Seiten: </span>{book?.numPages}</div>
+                    <div><span>Publisher: </span>{book?.publisher}</div>
+                    <div><span>Likes: </span>{book?.likes}</div>
                 </div>
             </div>
         </div>
-
         )
     }
 }
 
 //TODO beschreibung button adden
-//TODO itemDetail screen fetchen lieber im loaeder machen im router
 //TODO fehler wenn backend nicht online ist
 //TODO change fetchState to connectionState
 //TODO nur update wenn ein unterschied ist
+//TODO like funktion
+//TODO like funktion in detail item
