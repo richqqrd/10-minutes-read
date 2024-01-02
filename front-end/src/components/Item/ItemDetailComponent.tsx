@@ -1,10 +1,11 @@
 import React, {useEffect }  from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import {useBook, useDeleteBook, useUpdateBook} from '../../domain/hooks'
-import {fetchState} from '../../domain/FetchStateEnum'
+import {fetchState} from '../../domain/FetchState'
 import { LoadingComponent } from '../Loading/LoadingComponent';
 import { ErrorComponent } from '../Error/ErrorComponent';
 import { Book } from '../../domain/bookInterface';
+import noImage from '../../no-image.svg';
 
 
 
@@ -22,10 +23,10 @@ export const ItemDetailComponent = function() {
     },[updateBook])
 
     useEffect(() => {
-        if (deleteState === fetchState.error){
+        if (deleteState === 'error'){
             <ErrorComponent error={deleteError!} />
         }
-        if (updateState === fetchState.error){
+        if (updateState === 'error'){
             <ErrorComponent error={updateError!} />
         }
     }, [deleteState, updateState])
@@ -35,7 +36,7 @@ export const ItemDetailComponent = function() {
     }
 
     const handleLike = function(e: React.MouseEvent){
-        if (state === fetchState.success){
+        if (state === 'success'){
             const newBook: Book = {
                 title: book!.title,
                 subtitle: book!.subtitle,
@@ -55,16 +56,15 @@ export const ItemDetailComponent = function() {
 }
 
     useEffect(() => {
-        if (deleteState === fetchState.success){
+        if (deleteState === 'success'){
             navigate(`/books`);        
         }
-
     }, [deleteState]);
 
-    if (state === fetchState.loading){  
+    if (state === 'loading'){  
         return <LoadingComponent />
       }
-    else if (state === fetchState.error){
+    else if (state === 'error'){
         return <ErrorComponent error={error!} />
     }
     else {
@@ -72,7 +72,7 @@ export const ItemDetailComponent = function() {
             <div className='pb-12'>
                 <div className="flex">
                     <div className="pl-4 object-cover w-1/2 justify-center items-center">
-                        <img src={book?.cover}></img>
+                        <img src={book?.cover ? book.cover : noImage} className="w-64 h-64 object-cover"></img>
                     </div>
                     <div className="text-left pt-12">
                         <div className="text-2xl font-bold">{book?.title}</div>
@@ -102,10 +102,3 @@ export const ItemDetailComponent = function() {
         )
     }
 }
-
-//TODO beschreibung button adden
-//TODO fehler wenn backend nicht online ist
-//TODO change fetchState to connectionState
-//TODO nur update wenn ein unterschied ist
-//TODO like funktion
-//TODO like funktion in detail item
