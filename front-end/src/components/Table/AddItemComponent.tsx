@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Book } from '../../domain/bookInterface'
 import { useCreateBook } from '../../domain/hooks'
 import { useNavigate } from 'react-router-dom';
-import { fetchState } from '../../domain/FetchStateEnum';
+import { fetchState } from '../../domain/FetchState';
 import { ErrorComponent } from '../Error/ErrorComponent'
 
 
@@ -54,7 +54,7 @@ export const AddItemComponent = function() {
 
     return (
         <div>
-            {state === fetchState.error ? <ErrorComponent error={error!} /> : (
+            {state === `error` ? <ErrorComponent error={error!} /> : (
                 <form onSubmit={handleSubmit} className='grid grid-cols-2 gap-4 mt-4 ml-4 mr-4 mb-4'>
                     <div className='flex flex-col'>
                         <label className='font-bold'>title</label>
