@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { ItemComponent } from './ItemComponent';
 import {useBooks } from '../../domain/hooks'
-import {fetchState} from '../../domain/FetchStateEnum'
+import {fetchState} from '../../domain/FetchState'; 
 import { LoadingComponent } from '../Loading/LoadingComponent';
 import { ErrorComponent } from '../Error/ErrorComponent';
 
@@ -17,10 +17,10 @@ export const ItemContainerComponent = function() {
       refresh()
     }, []);
 
-    if (state === fetchState.loading){
+    if (state === 'loading'){
         return <LoadingComponent />
       }
-    else if (state === fetchState.error){
+    else if (state === 'error'){
         return <ErrorComponent error={error!} />
       }
     else {
