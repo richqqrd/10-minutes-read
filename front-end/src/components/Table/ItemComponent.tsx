@@ -1,6 +1,6 @@
 import React, {} from 'react';
 import {Book} from '../../domain/bookInterface';
-import noImage from '../../no-image.png';
+import noImage from '../../no-image.svg';
 import { NavLink } from 'react-router-dom';
 
 
