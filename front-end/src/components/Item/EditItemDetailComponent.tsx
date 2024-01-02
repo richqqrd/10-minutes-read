@@ -2,7 +2,7 @@ import React, { useEffect, useState }  from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import {useBook, useUpdateBook} from '../../domain/hooks'
 import { Book } from '../../domain/bookInterface'
-import { fetchState } from '../../domain/FetchStateEnum'
+import { fetchState } from '../../domain/FetchState'
 import { ErrorComponent } from '../Error/ErrorComponent';
 
 
@@ -26,10 +26,12 @@ export const EditItemDetailComponent = function() {
     const [likes, setLikes] = useState(0);
     const [userId, setUserId] = useState("");
 
-    getBook(paramIsbn!);
+    useEffect(() => {
+        getBook(paramIsbn!);
+    }, []);
 
     useEffect(() => {
-        if (state === fetchState.success && book) {
+        if (state === 'success' && book) {
             setTitle(book.title);
             setSubtitle(book.subtitle ?? "");
             setIsbn(book.isbn);
@@ -80,10 +82,10 @@ export const EditItemDetailComponent = function() {
         navigate(`/books/${isbn}`); 
     }
     useEffect(() => {
-        if (updatedState === fetchState.success){
+        if (updatedState === 'success'){
             navigate(`/books/${isbn}`);        
         }
-        else if (updatedState === fetchState.error){
+        else if (updatedState === 'error'){
             <ErrorComponent error={updatedError!} />
         }
     }, [updatedState]);
@@ -93,7 +95,7 @@ export const EditItemDetailComponent = function() {
 
     return (
         <div>
-            {state === fetchState.error ? <ErrorComponent error={error!} /> : (
+            {state === 'error' ? <ErrorComponent error={error!} /> : (
                 <form onSubmit={handleSubmit} className='grid grid-cols-2 gap-4 mt-4 ml-4 mr-4 mb-4'>
                     <div className='flex flex-col'>
                         <label className='font-bold'>title</label>
