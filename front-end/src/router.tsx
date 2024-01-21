@@ -4,8 +4,10 @@ import { ErrorComponent }  from './components/Error/ErrorComponent'
 import { ItemContainerComponent } from "./components/Table/ItemContainerComponent";
 import { ItemDetailComponent } from "./components/Item/ItemDetailComponent";
 import {EditItemDetailComponent} from './components/Item/EditItemDetailComponent'
-import { AddItemComponent } from "./components/Table/AddItemComponent";
+import { AddItemComponent } from "./components/Item/AddItemComponent";
 import { AboutComponent } from "./components/Footer/AboutComponent";
+import { LoginComponent } from "./components/Login/LoginComponent";
+import { LogoutComponent } from "./components/Logout/LogoutComponent";
 
 export const router = createBrowserRouter([
     {
@@ -41,6 +43,17 @@ export const router = createBrowserRouter([
             {
                 path: "about",
                 element: <AboutComponent />
+            },
+
+            {
+                path: "login",
+                element: <LoginComponent />
+            },
+
+            {
+                path: "logout",
+                element: <LogoutComponent />
+
             }
         ]
     }
