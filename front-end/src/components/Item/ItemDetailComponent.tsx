@@ -1,11 +1,12 @@
-import React, {useEffect }  from 'react';
+import React, {useEffect, useContext }  from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import {useBook, useDeleteBook, useUpdateBook} from '../../domain/hooks'
-import {fetchState} from '../../domain/FetchState'
 import { LoadingComponent } from '../Loading/LoadingComponent';
 import { ErrorComponent } from '../Error/ErrorComponent';
 import { Book } from '../../domain/bookInterface';
 import noImage from '../../no-image.svg';
+import { UserContext } from '../../userContext';
+
 
 
 
@@ -17,6 +18,8 @@ export const ItemDetailComponent = function() {
     const navigate = useNavigate();
     const { state: deleteState, error: deleteError, deleteBook } = useDeleteBook();
     const {book: updateBook, state: updateState, error: updateError, update} = useUpdateBook();
+    const { accessToken } = useContext(UserContext);
+
     
     useEffect(() => {
         getBook(isbn!);
@@ -81,8 +84,8 @@ export const ItemDetailComponent = function() {
                         <div className="text-2xl font-bold pt-3">{book?.price}</div>
                         <div className={"flex justify-start space-x-4 font-bold pt-3"}>
                             <button className="t-3 bg-purple-600 rounded-lg text-white text-xs w-24 h-10"onClick={handleLike}>Like book</button>
-                            <button className='t-3 bg-purple-600 rounded-lg text-white text-xs w-24 h-10'><Link to={`/books/${isbn}/edit`}>Edit book</Link></button>
-                            <button className="t-3 bg-purple-600 rounded-lg text-white text-xs w-24 h-10"onClick={handleDelete}>Delete book</button>
+                            {accessToken && <button className='t-3 bg-purple-600 rounded-lg text-white text-xs w-24 h-10'><Link to={`/books/${isbn}/edit`}>Edit book</Link></button>}
+                            {accessToken && <button className="t-3 bg-purple-600 rounded-lg text-white text-xs w-24 h-10" onClick={handleDelete}>Delete book</button>}
                         </div>
                     </div>
             </div>
