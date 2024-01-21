@@ -1,11 +1,12 @@
 import { Book as book } from './bookInterface'
+import { User as user } from '../user';
 import { Method } from './methodsEnum'
 
 
-const localhost = "http://localhost:4730/books/";
+const localhost = "http://localhost:4730/";
 
 
-async function templateFetch(url: string, method: string, payload?: book): Promise<any>{
+async function templateFetch(url: string, method: string, payload?: book | user): Promise<any>{
     try{
         const response = await fetch(url, {method: method, headers: {"Content-Type": "application/json"}, body: JSON.stringify(payload)})
         if (!response.ok){
@@ -22,23 +23,27 @@ async function templateFetch(url: string, method: string, payload?: book): Promi
 }
 
 async function getAllItems(): Promise<any> {
-    return await templateFetch(localhost, Method.Get)
+    return await templateFetch(localhost+"books", Method.Get)
 }
 
 async function getItemById(id: string): Promise<any> {
-   return await templateFetch(localhost+id, Method.Get); 
+   return await templateFetch(localhost+"books/"+id, Method.Get); 
 }
 
 async function createItem(item: book): Promise<any> {
-    return await templateFetch(localhost, Method.Post, item)
+    return await templateFetch(localhost+"books", Method.Post, item);
 }
 
 async function updateItem(id: string, item: book): Promise<any> {
-    return await templateFetch(localhost+id, Method.Put, item)
+    return await templateFetch(localhost+"books/"+id, Method.Put, item);
 }
 
 async function deleteItem(id: string): Promise<any> {
-    return await templateFetch(localhost+id, Method.Delete)
+    return await templateFetch(localhost+"books/"+id, Method.Delete);
 }
 
-export { getAllItems, getItemById, createItem, updateItem, deleteItem }
+async function login(user: user): Promise<any> {
+    return await templateFetch(localhost+"login", Method.Post, user);
+}
+
+export { getAllItems, getItemById, createItem, updateItem, deleteItem, login}
