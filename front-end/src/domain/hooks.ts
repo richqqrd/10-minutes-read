@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Book } from '../domain/bookInterface'
-import { getAllItems,  getItemById, createItem,  updateItem, deleteItem  } from '../domain/API';
+import { User } from '../user';
+import { getAllItems,  getItemById, createItem,  updateItem, deleteItem, login } from '../domain/API';
 import { fetchState } from './FetchState'
 
 
@@ -109,7 +110,26 @@ export const useDeleteBook = () => {
     };
 
     return { state, error, deleteBook}
+}
 
+export const useLoginUser = () => {
+    const [state, setFetchState] = useState<fetchState>('initial');
+    const [error, setError] = useState<Error | null>(null);
+    const [outputUser, setUser] = useState<User>();
+
+
+    const loginUser = (user: User) => {
+        setFetchState('loading');
+        login(user).then(response => {
+            setUser(response);
+            setFetchState('success');
+        }).catch(error => {
+            setFetchState('error');
+            setError(error);
+        });
+    };
+
+    return { outputUser, state, error, loginUser}
 }
 
     
