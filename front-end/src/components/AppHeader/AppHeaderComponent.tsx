@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import logo from '../../10-minutes-read-logo.png'
 import { NavLink } from 'react-router-dom';
+import { UserContext } from '../../userContext';
+
 
 export const AppHeaderComponent = function(){
+    const { accessToken } = useContext(UserContext);
+
     return ( 
         <div className="flex justify-between items-center bg-gray-200 py-3 black font-bold">
             <div className="flex items-center">
@@ -11,8 +15,9 @@ export const AppHeaderComponent = function(){
             </div>
             <div className="pr-4">
                 <NavLink to="/books" className="mr-4">All books</NavLink>
-                <NavLink to="books/add">Add book</NavLink>
+                {accessToken && <NavLink to="books/add" className="mr-4">Add book</NavLink>}
+                {accessToken ? <NavLink to="/logout">Logout</NavLink> : <NavLink to="/login">Login</NavLink>}
             </div>
-        </div>
+        </div> 
     )
 };
