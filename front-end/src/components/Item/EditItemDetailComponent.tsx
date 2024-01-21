@@ -1,9 +1,10 @@
-import React, { useEffect, useState }  from 'react';
+import React, { useEffect, useState, useContext }  from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import {useBook, useUpdateBook} from '../../domain/hooks'
 import { Book } from '../../domain/bookInterface'
-import { fetchState } from '../../domain/FetchState'
 import { ErrorComponent } from '../Error/ErrorComponent';
+import { UserContext } from '../../userContext';
+
 
 
 
@@ -25,6 +26,14 @@ export const EditItemDetailComponent = function() {
     const [cover, setCover] = useState("");
     const [likes, setLikes] = useState(0);
     const [userId, setUserId] = useState("");
+    const { accessToken } = useContext(UserContext);
+
+    useEffect(() => {
+        if (accessToken === "") {
+            navigate(`/books/` + paramIsbn); 
+        }
+    }, []);
+
 
     useEffect(() => {
         getBook(paramIsbn!);
