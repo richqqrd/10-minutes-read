@@ -50,7 +50,7 @@ export const LoginComponent = function(){
                     </div>
                     <div className='flex flex-col'>
                         <label className='font-bold'>password</label>
-                        <input className="border p-2" type="text" name="password" onChange={(event) => user.setPassword!(event.target.value)} required />
+                        <input className="border p-2" type="password" name="password" onChange={(event) => user.setPassword!(event.target.value)} required />
                     </div>
                 </div>
                 <div className="flex justify-center mt-4 space-x-2 font-bold">
