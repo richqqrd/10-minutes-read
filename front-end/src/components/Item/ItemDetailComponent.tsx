@@ -83,7 +83,7 @@ export const ItemDetailComponent = function() {
                         <div className="text-base underline">{book?.author}</div> 
                         <div className="text-2xl font-bold pt-3">{book?.price}</div>
                         <div className={"flex justify-start space-x-4 font-bold pt-3"}>
-                            <button className="t-3 bg-purple-600 rounded-lg text-white text-xs w-24 h-10"onClick={handleLike}>Like book</button>
+                            {accessToken && <button className="t-3 bg-purple-600 rounded-lg text-white text-xs w-24 h-10"onClick={handleLike}>Like book</button>}
                             {accessToken && <button className='t-3 bg-purple-600 rounded-lg text-white text-xs w-24 h-10'><Link to={`/books/${isbn}/edit`}>Edit book</Link></button>}
                             {accessToken && <button className="t-3 bg-purple-600 rounded-lg text-white text-xs w-24 h-10" onClick={handleDelete}>Delete book</button>}
                         </div>
