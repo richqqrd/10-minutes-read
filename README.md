@@ -5,8 +5,6 @@ A web app displaying a list of CRUD-able items provided by a local back-end serv
 Built for the "Front-End Development" course by Prof. Dr. Schüler.
 **Grade: 1.0**
 
-![App Screenshot](src/10-minutes-read-logo.png)
-
 
 ## 🛠 Tech Stack
 
