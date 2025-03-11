@@ -41,14 +41,5 @@ npm start
 The application will be available at http://localhost:3000
 
 
-## 📁 Project Structure
-
-src/
-- components/   Reusable UI components
-- domain/       # Business logic and API integration
-- pages/        # Page components
-- App.tsx       # Main application component
-- outer.tsx    # Application routing
-
 ## 👤 Author
 - Richard Middendorf 
