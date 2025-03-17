@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import logo from '../../assets/images/logo.png';
+import logo from '../../assets/images/logo.svg';
 import { NavLink } from 'react-router-dom';
 import { UserContext } from '../../context/userContext';
 

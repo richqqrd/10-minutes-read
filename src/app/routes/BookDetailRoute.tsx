@@ -2,9 +2,9 @@ import React, { useEffect, useContext, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useBook, useDeleteBook, useUpdateBook } from '../../hooks/useBooks';
 import Loading from '../../components/Loading/Loading';
-import { Error } from '../../components/Error/Error';
+import ErrorComponent from '../../components/Error/Error';
 import { Book } from '../../types/book';
-import noImage from '../../assets/images/no-image.svg';
+import noImage from '../../assets/images/no-image.svg'
 import { UserContext } from '../../context/userContext';
 
 const BookDetailRoute = () => {
@@ -17,10 +17,9 @@ const BookDetailRoute = () => {
     const [errorState, setErrorState] = useState<Error | null>(null);
 
     useEffect(() => {
-        if (isbn) {
-            getBook(isbn);
-        }
-    }, [isbn, getBook, updateBook]);
+        getBook(isbn!);
+    }, [updateBook])
+
 
     useEffect(() => {
         if (deleteState === 'error' && deleteError) {
@@ -67,7 +66,7 @@ const BookDetailRoute = () => {
         return <Loading />
     }
     else if (state === 'error') {
-        return <Error error={error!} />
+        return <ErrorComponent error={error!} />
     }
     else {
         return (

@@ -1,6 +1,6 @@
 import { createBrowserRouter, redirect } from "react-router-dom";
 import App from './app';
-import { Error } from '../components/Error/Error';
+import ErrorComponent from '../components/Error/Error';
 import BooksRoute from "./routes/BooksRoute";
 import BookDetailRoute from "./routes/BookDetailRoute";
 import EditBookRoute from './routes/EditBookRoute';
@@ -13,7 +13,7 @@ export const router = createBrowserRouter([
     {
         path: "/",
         element: <App />,
-        errorElement: <Error error={{ name: "", message: "" }} />,
+        errorElement: <ErrorComponent error={{ name: "", message: "" }} />,
         children: [
             {
                 path: "",

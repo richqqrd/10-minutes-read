@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { Book } from '../../types/book';
 import { useCreateBook } from '../../hooks/useBooks';
 import { useNavigate } from 'react-router-dom';
-import { Error } from '../../components/Error/Error';
+import ErrorComponent from '../../components/Error/Error';
 import { UserContext } from '../../context/userContext';
 
 const AddBookRoute = () => {
@@ -15,7 +15,7 @@ const AddBookRoute = () => {
         }
     }, [accessToken, navigate]);
 
-    const { state, error, createBook } = useCreateBook();
+    const { state, error, create } = useCreateBook();
     const [title, setTitle] = useState("");
     const [subtitle, setSubtitle] = useState("");
     const [isbn, setIsbn] = useState("");
@@ -43,7 +43,7 @@ const AddBookRoute = () => {
             likes: 0,
             userId: "1"
         };
-        createBook(newBook);
+        create(newBook);
         navigate(`/books/${isbn}`);
     }
 
@@ -60,7 +60,7 @@ const AddBookRoute = () => {
 
     return (
         <div>
-            {state === `error` && error ? <Error error={error} /> : (
+            {state === `error` && error ? <ErrorComponent error={error} /> : (
                 <form onSubmit={handleSubmit} className='grid grid-cols-2 gap-4 mt-4 ml-4 mr-4 mb-4'>
                     <div className='flex flex-col'>
                         <label className='font-bold'>title</label>
